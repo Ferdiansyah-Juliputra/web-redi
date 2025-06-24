@@ -44,7 +44,7 @@ class ClientController extends Controller
 
         Client::create($validated);
 
-        return redirect()->route('client.index')->with('message', [
+        return redirect()->route('admin.client.index')->with('message', [
             'type'=>'success',
             'text'=>'Client added successfully!',
         ]);
@@ -73,7 +73,7 @@ class ClientController extends Controller
 
         $client->update($validated);
 
-        return redirect()->route('client.index')->with('message', [
+        return redirect()->route('admin.client.index')->with('message', [
             'type'=>'success',
             'text'=>'Client updated succesfully',
         ]);
@@ -86,7 +86,7 @@ class ClientController extends Controller
         }
         $client->delete();
 
-        return redirect()->route('client.index')->with('message', [
+        return redirect()->route('admin.client.index')->with('message', [
             'type'=>'success',
             'text'=>'Client deleted successfully!',
         ]);
