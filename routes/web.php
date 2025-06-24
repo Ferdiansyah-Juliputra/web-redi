@@ -11,15 +11,17 @@ use App\Http\Controllers\{
     FieldController,
     OpportunityController
 };
+use App\Http\Controllers\HomepageController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-Route::get('/', function () {
+Route::get('/', [HomepageController::class, 'index'])->name('home');
+Route::get('/admin', function() {
     return Inertia::render('welcome');
-})->name('home');
+})->name('admin');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('gallery', GalleryController::class);
     Route::resource('experience', ExperienceController::class);

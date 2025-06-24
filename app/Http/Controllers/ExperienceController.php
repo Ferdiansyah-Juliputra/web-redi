@@ -56,7 +56,7 @@ class ExperienceController extends Controller
         $experience->clients()->sync($request->input('client_ids', []));
         $experience->provinces()->sync($request->input('province_ids', []));
 
-        return redirect()->route('experience.index')->with('message', [
+        return redirect()->route('admin.experience.index')->with('message', [
             'type' => 'success',
             'text' => 'Experience added successfully!',
         ]);
@@ -96,7 +96,7 @@ class ExperienceController extends Controller
         $experience->clients()->sync($request->input('client_ids', []));
         $experience->provinces()->sync($request->input('province_ids', []));
 
-        return redirect()->route('experience.index')->with('message', [
+        return redirect()->route('admin.experience.index')->with('message', [
             'type' => 'success',
             'text' => 'Experience updated successfully!',
         ]);
@@ -112,7 +112,7 @@ class ExperienceController extends Controller
         $experience->provinces()->detach();
         $experience->delete();
 
-        return redirect()->route('experience.index')->with('message', [
+        return redirect()->route('admin.experience.index')->with('message', [
             'type' => 'success',
             'text' => 'Experience deleted successfully!',
         ]);

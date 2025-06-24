@@ -43,7 +43,7 @@ export default function Index() {
 
   const handleDelete = (id: number) => {
     if (confirm('Are you sure you want to delete this experience?')) {
-      router.delete(route('experience.destroy', id), {
+      router.delete(route('admin.experience.destroy', id), {
         onSuccess: () => closeModal(),
       });
     }
@@ -54,7 +54,7 @@ export default function Index() {
       <Head title="Experiences" />
       <div className="mx-4 my-4 flex justify-between items-center">
         <h1 className="text-2xl font-semibold">Experiences</h1>
-        <Link href={route('experience.create')}>
+        <Link href={route('admin.experience.create')}>
           <Button>Add Experience</Button>
         </Link>
       </div>

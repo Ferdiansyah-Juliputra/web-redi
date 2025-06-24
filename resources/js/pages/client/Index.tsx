@@ -26,7 +26,7 @@ export default function Index() {
 
   const handleDelete = (id: number) => {
     if (confirm('Are you sure you want to delete this client?')) {
-      router.delete(route('client.destroy', id));
+      router.delete(route('admin.client.destroy', id));
     }
   };
 
@@ -36,7 +36,7 @@ export default function Index() {
 
       <div className="mx-4 my-4 flex justify-between items-center">
         <h1 className="text-2xl font-semibold">Clients</h1>
-        <Link href={route('client.create')}>
+        <Link href={route('admin.client.create')}>
           <Button>Add Client</Button>
         </Link>
       </div>
@@ -54,7 +54,7 @@ export default function Index() {
               )}
               <h3 className="text-lg font-bold mb-1 text-black">{client.name}</h3>
               <div className="flex gap-2">
-                <Link href={route('client.edit', client.id)}>
+                <Link href={route('admin.client.edit', client.id)}>
                   <Button variant="secondary">Edit</Button>
                 </Link>
                 <Button variant="destructive" onClick={() => handleDelete(client.id)}>

@@ -30,7 +30,7 @@ export default function Index() {
 
     const handleDelete = (id: number) => {
         if (confirm('Are you sure you want to delete this item?')) {
-            router.delete(route('gallery.destroy', id));
+            router.delete(route('admin.gallery.destroy', id));
         }
     };
 
@@ -39,7 +39,7 @@ export default function Index() {
             <Head title="Gallery" />
             <div className="mx-4 my-4 flex justify-between items-center">
                 <h1 className="text-2xl font-semibold">Gallery</h1>
-                <Link href={route('gallery.create')}>
+                <Link href={route('admin.gallery.create')}>
                     <Button>Add to Gallery</Button>
                 </Link>
             </div>
@@ -61,7 +61,7 @@ export default function Index() {
                             <p className="text-sm text-gray-600 mb-3">{gallery.description}</p>
 
                             <div className="flex gap-2">
-                                <Link href={route('gallery.edit', gallery.id)}>
+                                <Link href={route('admin.gallery.edit', gallery.id)}>
                                     <Button variant="secondary">Edit</Button>
                                 </Link>
                                 <Button

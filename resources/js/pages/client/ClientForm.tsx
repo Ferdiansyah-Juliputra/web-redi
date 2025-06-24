@@ -35,12 +35,12 @@ export default function ClientForm({ client }: { client?: Client }) {
 
     if (isEdit) {
       formData.append('_method', 'put');
-      router.post(route('client.update', client.id), formData, {
+      router.post(route('admin.client.update', client.id), formData, {
         forceFormData: true,
         preserveScroll: true,
       });
     } else {
-      router.post(route('client.store'), formData, {
+      router.post(route('admin.client.store'), formData, {
         forceFormData: true,
         preserveScroll: true,
       });

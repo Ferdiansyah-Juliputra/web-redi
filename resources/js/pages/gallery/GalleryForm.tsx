@@ -46,12 +46,12 @@ export default function GalleryForm({ gallery }: { gallery?: Gallery }) {
 
     if (isEdit) {
       formData.append('_method', 'put');
-      router.post(route('gallery.update', gallery.id), formData, {
+      router.post(route('admin.gallery.update', gallery.id), formData, {
         forceFormData: true,
         preserveScroll: true,
       });
     } else {
-      router.post(route('gallery.store'), formData, {
+      router.post(route('admin.gallery.store'), formData, {
         forceFormData: true,
         preserveScroll: true,
       });

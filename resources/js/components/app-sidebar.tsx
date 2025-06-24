@@ -10,58 +10,48 @@ import AppLogo from './app-logo';
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        href: '/dashboard',
+        href: route('admin.dashboard'), 
         icon: LayoutGrid,
     },
     {
         title: 'Gallery',
-        href: '/gallery',
+        href: route('admin.gallery.index'), 
         icon: Images,
     },
     {
         title: 'Experiences',
-        href: '/experience',
+        href: route('admin.experience.index'),
         icon: LaptopMinimalCheck,
     },
-    
     {
         title: 'Clients',
-        href: '/client',
+        href: route('admin.client.index'),
         icon: HandHeart,
     },
     {
         title: 'Projects',
-        href: '/project',
+        href: route('admin.project.index'),
         icon: BookCheck,
     },
     {
         title: 'Publications',
-        href: '/publication',
+        href: route('admin.publication.index'),
         icon: FolderCheck,
     },
     {
         title: 'Opportunities',
-        href: '/opportunity',
+        href: route('admin.opportunity.index'),
         icon: Axis3d,
     },
     {
         title: 'Field of Work',
-        href: '/field',
+        href: route('admin.field.index'),
         icon: RectangleEllipsis,
     },
 ];
 
 const footerNavItems: NavItem[] = [
-    // {
-    //     title: 'Repository',
-    //     href: 'https://github.com/laravel/react-starter-kit',
-    //     icon: Folder,
-    // },
-    // {
-    //     title: 'Documentation',
-    //     href: 'https://laravel.com/docs/starter-kits#react',
-    //     icon: BookOpen,
-    // },
+
 ];
 
 export function AppSidebar() {
@@ -71,7 +61,7 @@ export function AppSidebar() {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <Link href="/dashboard" prefetch>
+                            <Link href={route('admin.dashboard')} prefetch>
                                 <AppLogo />
                             </Link>
                         </SidebarMenuButton>

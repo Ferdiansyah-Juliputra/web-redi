@@ -76,12 +76,12 @@ export default function ExperienceForm({ experience, clients, fields, provinces 
 
     if (isEdit) {
       formData.append('_method', 'put');
-      router.post(route('experience.update', experience.id), formData, {
+      router.post(route('admin.experience.update', experience.id), formData, {
         forceFormData: true,
         preserveScroll: true,
       });
     } else {
-      router.post(route('experience.store'), formData, {
+      router.post(route('admin.experience.store'), formData, {
         forceFormData: true,
         preserveScroll: true,
       });

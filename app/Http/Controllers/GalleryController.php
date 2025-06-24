@@ -47,7 +47,7 @@ class GalleryController extends Controller
 
         Log::info('Album berhasil ditambahkan:', $gallery->toArray());
 
-        return redirect()->route('gallery.index')->with('success', 'Gallery created successfully.');
+        return redirect()->route('admin.gallery.index')->with('success', 'Gallery created successfully.');
     }
 
     public function edit(Gallery $gallery)
@@ -81,7 +81,7 @@ class GalleryController extends Controller
             'image_path' => $gallery->image_path,
         ]);
 
-        return redirect()->route('gallery.index')->with('success', 'Gallery updated successfully.');
+        return redirect()->route('admin.gallery.index')->with('success', 'Gallery updated successfully.');
     }
 
     public function destroy(Gallery $gallery)
@@ -92,6 +92,6 @@ class GalleryController extends Controller
 
         $gallery->delete();
 
-        return redirect()->route('gallery.index')->with('success', 'Gallery deleted successfully.');
+        return redirect()->route('admin.gallery.index')->with('success', 'Gallery deleted successfully.');
     }
 }
