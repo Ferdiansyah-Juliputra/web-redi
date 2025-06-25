@@ -11,10 +11,8 @@ class PublicationController extends Controller
 {
     public function index()
     {
-        $publication = Publication::latest()->get();
-        return Inertia::render('publication/Index', [
-            'publications' => $publication,
-        ]);
+        $publications = Publication::latest()->paginate(10);
+        return Inertia::render('publication/Index', ['publications' => $publications]);
     }
 
     public function create()
@@ -24,54 +22,59 @@ class PublicationController extends Controller
 
     public function store(Request $request)
     {
+        // 1. Validasi disesuaikan dengan nama field di form
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'year' => 'required|integer',
+            'year' => 'required|numeric',
             'doi' => 'nullable|string|max:255',
-            'file' => 'nullable|file|mimes:pdf|max:5120', // Max 5MB
+            'file' => 'nullable|file|mimes:pdf|max:2048', // Diubah menjadi 'file'
         ]);
 
+        $path = null;
         if ($request->hasFile('file')) {
-            $validated['file_path'] = $request->file('file')->store('publications', 'public');
+            $path = $request->file('file')->store('publications', 'public');
         }
 
-        Publication::create($validated);
-
-        return redirect()->route('admin.publication.index')->with('message', [
-            'type' => 'success',
-            'text' => 'Publication added successfully!',
+        Publication::create([
+            'title' => $validated['title'],
+            'year' => $validated['year'],
+            'doi' => $validated['doi'],
+            'file_path' => $path, // Diubah menjadi 'file_path' sesuai model
         ]);
+
+        return redirect()->route('admin.publication.index')->with('success', 'Publication added successfully!');
     }
 
     public function edit(Publication $publication)
     {
-        return Inertia::render('publication/Edit', [
-            'publication' => $publication,
-        ]);
+        return Inertia::render('publication/Edit', ['publication' => $publication]);
     }
-
+    
     public function update(Request $request, Publication $publication)
     {
+        // 2. Validasi juga disesuaikan
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'year' => 'required|integer',
+            'year' => 'required|numeric',
             'doi' => 'nullable|string|max:255',
-            'file' => 'nullable|file|mimes:pdf|max:5120',
+            'file' => 'nullable|file|mimes:pdf|max:2048', // Diubah menjadi 'file'
         ]);
+
+        // 3. Logika update yang lebih aman
+        $publication->title = $validated['title'];
+        $publication->year = $validated['year'];
+        $publication->doi = $validated['doi'];
 
         if ($request->hasFile('file')) {
             if ($publication->file_path) {
                 Storage::disk('public')->delete($publication->file_path);
             }
-            $validated['file_path'] = $request->file('file')->store('publications', 'public');
+            $publication->file_path = $request->file('file')->store('publications', 'public');
         }
+        
+        $publication->save();
 
-        $publication->update($validated);
-
-        return redirect()->route('admin.publication.index')->with('message', [
-            'type' => 'success',
-            'text' => 'Publication updated successfully!',
-        ]);
+        return redirect()->route('admin.publication.index')->with('success', 'Publication updated successfully');
     }
 
     public function destroy(Publication $publication)
@@ -79,12 +82,8 @@ class PublicationController extends Controller
         if ($publication->file_path) {
             Storage::disk('public')->delete($publication->file_path);
         }
-
         $publication->delete();
 
-        return redirect()->route('admin.publication.index')->with('message', [
-            'type' => 'success',
-            'text' => 'Publication deleted.',
-        ]);
+        return redirect()->route('admin.publication.index')->with('success', 'Publication deleted successfully!');
     }
 }

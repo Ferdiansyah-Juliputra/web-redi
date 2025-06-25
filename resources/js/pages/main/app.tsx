@@ -1,3 +1,4 @@
+// Import Dependencies
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import axios from 'axios';
@@ -8,17 +9,21 @@ import PublicLayout from '../../layouts/PublicLayout';
 import AboutUsPage from '../about/AboutUsPage';
 import GalleryPage from '../gallery/GalleryPage';
 import ClientPage from '../client/ClientPage'; 
-import ProjectPage from '../project/ProjectPage';// Layout baru dengan sidebar
+import ProjectPage from '../project/ProjectPage';
+import ExperiencePage from '../experience/ExperiencePage';
+import ExperienceDetailPage from '../experience/ExperienceDetailPage';
+import PublicationPage from '../publication/PublicationPage';
+import PublicationDetailPage from '../publication/PublicationPreview';
 
-// =======================================================
-// Komponen Wrapper untuk HomePage
-// Tugasnya HANYA mengambil data untuk halaman utama.
-// =======================================================
+// Main Wrapper
 function HomePageWrapper() {
     const [pageProps, setPageProps] = useState({
         clients: [],
         experiences: [],
         stats: { projects: 0, clients: 0, fields: 0 },
+        projectsByYear: [],
+        projectsByField: [],
+        publications:[],
     });
     const [loading, setLoading] = useState(true);
 
@@ -39,37 +44,31 @@ function HomePageWrapper() {
     }, []);
 
     if (loading) {
-        // Saat loading, kita tampilkan skeleton di dalam layout utama
-        // agar sidebar tetap terlihat.
+
         return <HomepageSkeleton />;
     }
 
-    // Setelah data ada, render HomePage dengan datanya
     return <HomePage {...pageProps} />;
 }
 
 
-// =======================================================
-// Komponen Aplikasi Utama
-// Tugasnya HANYA mengatur routing dan layout.
-// =======================================================
+// Main App
 function PublicApp() {
     return (
         <BrowserRouter>
             <Routes>
-                {/* Semua rute di dalam sini akan secara otomatis 
-                  dibungkus oleh PublicLayout (yang berisi sidebar).
-                */}
-                <Route element={<PublicLayout />}>
-                
-                    {/* Rute untuk halaman utama */}
-                    <Route path="/" element={<HomePageWrapper />} />
 
-                    {/* Contoh rute untuk halaman lain di masa depan */}
+                <Route element={<PublicLayout />}>
+                    {/* Routes */}
+                    <Route path="/" element={<HomePageWrapper />} />
                     <Route path="/about" element= {<AboutUsPage />} />
                     <Route path="/gallery" element={<GalleryPage />} />
                     <Route path="/clients" element={<ClientPage />} />
                     <Route path="/projects" element={<ProjectPage />} />
+                    <Route path="/experiences" element={<ExperiencePage />} />
+                    <Route path="/experiences/:id" element={<ExperienceDetailPage />} />
+                    <Route path="/publications" element={<PublicationPage />} />
+                    <Route path="/publications/:id" element={<PublicationDetailPage />} />
                     {/* ...dan seterusnya... */}
 
                 </Route>

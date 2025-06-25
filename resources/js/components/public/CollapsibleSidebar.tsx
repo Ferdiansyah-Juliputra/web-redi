@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Menu, Home, Image, Briefcase, Book, Megaphone, Rss, ChevronDown, ChevronLeft, X, MessageCircleWarning } from 'lucide-react';
+import { Menu, Home, Image, Briefcase, Book, Megaphone, Rss, ChevronDown, ChevronLeft, X, MessageCircleWarning, Gauge } from 'lucide-react';
 import { useIsMobile } from '../../hooks/use-mobile'; // 1. Impor hook kita
 import Logo from '../../assets/logo transparan 1.png';
 
@@ -15,7 +15,7 @@ const menuItems: MenuItemType[] = [
     { title: 'Gallery', href: '/gallery', icon: <Image /> }, 
     { title: 'Projects', href: '/projects', icon: <Book /> },
     { title: 'Clients', href: '/clients', icon: <Briefcase /> }, 
-    { title: 'Experiences', href: '/experiences', icon: <Rss /> },
+    { title: 'Experiences', href: '/experiences', icon: <Gauge /> },
     { title: 'Publications', href: '/publications', icon: <Megaphone /> },
     { title: 'News', isDropdown: true, icon: <MessageCircleWarning />, 
         subItems: [ { title: 'Internship', href: '/news/internship' }, { title: 'Recruitment', href: '/news/recruitment' } ]},
@@ -81,7 +81,7 @@ export default function CollapsibleSidebar({ isMobileOpen, setIsMobileOpen }: Si
                                         setIsNewsOpen(!isNewsOpen);
                                     }
                                 }}
-                                className={({isActive}) => `flex items-center p-3 h-14 rounded-md transition-colors ${isActive && !item.isDropdown ? 'bg-indigo-50 text-indigo-700 font-semibold' : 'text-gray-600 hover:bg-gray-100'}`}
+                                className={({isActive}) => `flex items-center p-3 h-14 rounded-md transition-colors ${isActive && !item.isDropdown ? 'bg-indigo-50 text-indigo-900 font-semibold' : 'text-gray-600 hover:bg-gray-100'}`}
                             >
                                 <div className="w-8 flex items-center justify-center flex-shrink-0">{item.icon}</div>
                                 <span className={`flex-1 text-left ml-2 whitespace-nowrap transition-opacity ${isExpanded ? 'opacity-100' : 'opacity-0'}`}>{item.title}</span>

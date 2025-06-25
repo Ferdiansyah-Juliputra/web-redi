@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage; // <-- 1. Import Storage
+use Illuminate\Support\Facades\Storage; 
 
 class Gallery extends Model
 {

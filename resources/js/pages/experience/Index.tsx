@@ -18,6 +18,7 @@ interface Experience {
   image_path?: string;
   clients: { id: number; name: string }[];
   provinces: { id: number; name: string }[];
+  fields: { id: number; name: string }[];
 }
 
 interface PageProps {
@@ -77,6 +78,7 @@ export default function Index() {
                 {experience.provinces.map((prov) => prov.name).join(', ')}
               </p>
 
+
               {experience.image_path && (
                 <img
                   src={`/storage/${experience.image_path}`}
@@ -118,7 +120,7 @@ export default function Index() {
             )}
 
             <div className="flex justify-end gap-2 pt-2">
-              <Link href={route('experience.edit', selectedExperience.id)}>
+              <Link href={route('admin.experience.edit', selectedExperience.id)}>
                 <Button variant="secondary">Edit</Button>
               </Link>
               <Button variant="destructive" onClick={() => handleDelete(selectedExperience.id)}>

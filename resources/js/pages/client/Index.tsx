@@ -44,7 +44,7 @@ export default function Index() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mx-4 my-4">
         {clients.length > 0 ? (
           clients.map((client) => (
-            <div key={client.id} className="border border-black rounded-2xl p-4 relative bg-gray-300">
+            <div key={client.id} className="border-black rounded-2xl p-4 relative bg-gradient-to-b from-white/45 to-white/15">
               {client.image_path && (
                 <img
                   src={`/storage/${client.image_path}`}
@@ -52,7 +52,7 @@ export default function Index() {
                   className="w-full h-32 object-contain rounded mb-2"
                 />
               )}
-              <h3 className="text-lg font-bold mb-1 text-black">{client.name}</h3>
+              <h3 className="text-lg font-bold mb-1 text-white">{client.name}</h3>
               <div className="flex gap-2">
                 <Link href={route('admin.client.edit', client.id)}>
                   <Button variant="secondary">Edit</Button>

@@ -8,43 +8,55 @@ use App\Models\Experience;
 use App\Models\Project;
 use App\Models\Field;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class HomepageDataController extends Controller
 {
-    /**
-     * Controller ini hanya memiliki satu tugas: menyediakan semua data
-     * yang dibutuhkan untuk halaman utama publik dalam format JSON.
-     * Menggunakan __invoke adalah praktik terbaik untuk controller satu aksi.
-     */
     public function __invoke()
     {
-        // 1. Menghitung data Statistik
+        // Data Statistik (tidak berubah)
         $stats = [
             'projects' => Project::count(),
             'clients'  => Client::count(),
-            'fields'  => Field::count(), // Ganti dengan logika Anda jika ada, misal: Field::count()
+            'fields'  => Field::count(),
         ];
 
-        // 2. Mengambil data Klien
-        // Ambil semua klien, ubah path gambar menjadi URL lengkap
-        $clients = Client::latest()->get()->map(function ($client) {
-            $client->image_url = $client->image_path ? Storage::url($client->image_path) : null;
-            return $client;
-        });
+        // Data Klien dan Experience (tidak berubah)
+        $clients = Client::latest()->limit(10)->get();
+        $experiences = Experience::latest()->with('clients:id,name')->take(6)->get();
 
-        // 3. Mengambil data Experience untuk pratinjau (misal: 6 terbaru)
-        $experiences = Experience::latest()->take(6)->get()->map(function ($experience) {
-            // Asumsi model Experience juga punya 'image_path'
-            $experience->image_url = $experience->image_path ? Storage::url($experience->image_path) : null;
-            return $experience;
-        });
+        // =======================================================
+        // PERBAIKAN ADA DI BAGIAN INI
+        // =======================================================
+        // Data untuk Line Chart: Jumlah proyek per tahun
+        $projectsByYear = Project::select(
+                'year', // Langsung pilih kolom 'year'
+                DB::raw('count(*) as count')
+            )
+            ->groupBy('year')
+            ->orderBy('year', 'asc')
+            ->get();
+            
+        // Data untuk Pie Chart: Jumlah proyek per bidang (field)
+        $projectsByField = Field::withCount('projects')
+            ->get()
+            ->map(function ($field) {
+                return [
+                    'field' => $field->field,
+                    'value' => $field->projects_count,
+                ];
+            })
+            ->filter(function ($field) {
+                return $field['value'] > 0;
+            });
 
-        // 4. Mengembalikan semua data dalam satu respons JSON
         return response()->json([
-            'stats'       => $stats,
-            'clients'     => $clients,
-            'experiences' => $experiences,
+            'stats'           => $stats,
+            'clients'         => $clients,
+            'experiences'     => $experiences,
+            'projectsByYear'  => $projectsByYear,
+            'projectsByField' => $projectsByField->values(),
         ]);
     }
 }
