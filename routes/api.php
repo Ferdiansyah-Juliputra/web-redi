@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\HomepageDataController;
+use App\Http\Controllers\Api\GalleryController;
+use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\ProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -10,3 +13,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/homepage-data', HomepageDataController::class, 'getDataForApi');
+Route::get('/galleries', [GalleryController::class, 'index']);
+Route::get('/clients', [ClientController::class, 'index']);
+Route::get('/projects', [ProjectController::class, 'index']);
+Route::get('/projects/filters', [ProjectController::class, 'getFilterOptions']);

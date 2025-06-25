@@ -15,14 +15,12 @@ use App\Http\Controllers\HomepageController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-
-Route::get('/{any}', function () {
-    return view('public');
-})->where('any', '.*');
+// RUTE SPESIFIK DITARUH DI ATAS
 Route::get('/admin', function() {
     return Inertia::render('welcome');
 })->name('admin');
 
+// GRUP RUTE ADMIN PANEL
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('gallery', GalleryController::class);
@@ -34,6 +32,11 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('opportunity', OpportunityController::class);
 });
 
-// File rute tambahan
+// FILE RUTE UNTUK LOGIN, DLL.
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
+
+// RUTE CATCH-ALL UNTUK APLIKASI PUBLIK (HARUS DI PALING BAWAH)
+Route::get('/{any}', function () {
+    return view('public');
+})->where('any', '.*');

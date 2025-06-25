@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>REDI - Company Profile</title>
+        <title>Regional Economic Development Institute</title>
 
         <!-- Memuat file CSS utama -->
         @vite('resources/css/app.css')

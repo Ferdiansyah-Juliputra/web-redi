@@ -86,4 +86,10 @@ class HomepageController extends Controller
         // Kita tidak perlu mengirim data apa pun untuk saat ini.
         return Inertia::render('about/AboutUsPage');
     }
+    public function gallery()
+    {
+        // Tugasnya hanya me-render komponen React 'About/Index.tsx'
+        // Kita tidak perlu mengirim data apa pun untuk saat ini.
+        return Inertia::render('gallery/Gallery');
+    }
 }

@@ -1,15 +1,14 @@
-// resources/js/pages/main/app.tsx
-
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import axios from 'axios';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
-// Impor komponen-komponen kita
 import HomePage from '../homepage/HomePage';
 import HomepageSkeleton from '../../components/HomepageSkeleton';
 import PublicLayout from '../../layouts/PublicLayout';
-import AboutUsPage from '../about/AboutUsPage'; // Layout baru dengan sidebar
+import AboutUsPage from '../about/AboutUsPage';
+import GalleryPage from '../gallery/GalleryPage';
+import ClientPage from '../client/ClientPage'; 
+import ProjectPage from '../project/ProjectPage';// Layout baru dengan sidebar
 
 // =======================================================
 // Komponen Wrapper untuk HomePage
@@ -68,8 +67,9 @@ function PublicApp() {
 
                     {/* Contoh rute untuk halaman lain di masa depan */}
                     <Route path="/about" element= {<AboutUsPage />} />
-                    <Route path="/gallery" element={<div className="p-8"><h1>Gallery</h1></div>} />
-                    <Route path="/projects" element={<div className="p-8"><h1>Projects</h1></div>} />
+                    <Route path="/gallery" element={<GalleryPage />} />
+                    <Route path="/clients" element={<ClientPage />} />
+                    <Route path="/projects" element={<ProjectPage />} />
                     {/* ...dan seterusnya... */}
 
                 </Route>

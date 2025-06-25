@@ -10,11 +10,15 @@ import Logo from '../../assets/logo transparan 1.png';
 type SubItem = { title: string; href: string };
 type MenuItemType = { title: string; href?: string; icon: React.ReactNode; isDropdown?: boolean; subItems?: SubItem[] };
 const menuItems: MenuItemType[] = [
-    { title: 'Home', href: '/', icon: <Home /> }, { title: 'About Us', href: '/about', icon: <Briefcase /> },
-    { title: 'Gallery', href: '/gallery', icon: <Image /> }, { title: 'Projects', href: '/projects', icon: <Book /> },
-    { title: 'Clients', href: '/clients', icon: <Briefcase /> }, { title: 'Experiences', href: '/experiences', icon: <Rss /> },
+    { title: 'Home', href: '/', icon: <Home /> }, 
+    { title: 'About Us', href: '/about', icon: <Briefcase /> },
+    { title: 'Gallery', href: '/gallery', icon: <Image /> }, 
+    { title: 'Projects', href: '/projects', icon: <Book /> },
+    { title: 'Clients', href: '/clients', icon: <Briefcase /> }, 
+    { title: 'Experiences', href: '/experiences', icon: <Rss /> },
     { title: 'Publications', href: '/publications', icon: <Megaphone /> },
-    { title: 'News', isDropdown: true, icon: <MessageCircleWarning />, subItems: [ { title: 'Internship', href: '/news/internship' }, { title: 'Recruitment', href: '/news/recruitment' } ]},
+    { title: 'News', isDropdown: true, icon: <MessageCircleWarning />, 
+        subItems: [ { title: 'Internship', href: '/news/internship' }, { title: 'Recruitment', href: '/news/recruitment' } ]},
 ];
 
 interface SidebarProps {

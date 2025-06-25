@@ -10,20 +10,32 @@ use Illuminate\Support\Facades\Log;
 
 class GalleryController extends Controller
 {
+    /**
+     * Menampilkan daftar galeri dengan paginasi.
+     */
     public function index()
     {
-        $galleries = Gallery::latest()->get();
+        // UBAH BARIS INI: Ganti get() dengan paginate()
+        // Ini akan secara otomatis membatasi data menjadi 12 per halaman
+        // dan mengirimkan semua data paginasi ke komponen Inertia.
+        $galleries = Gallery::latest()->paginate(12);
 
         return Inertia::render('gallery/Index', [
             'galleries' => $galleries,
         ]);
     }
 
+    /**
+     * Menampilkan form untuk membuat galeri baru.
+     */
     public function create()
     {
         return Inertia::render('gallery/Create');
     }
 
+    /**
+     * Menyimpan galeri baru ke database.
+     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -50,13 +62,19 @@ class GalleryController extends Controller
         return redirect()->route('admin.gallery.index')->with('success', 'Gallery created successfully.');
     }
 
+    /**
+     * Menampilkan form untuk mengedit galeri.
+     */
     public function edit(Gallery $gallery)
     {
-        return Inertia::render('gallery/Edit', [ // <-- sesuaikan nama file react-nya
+        return Inertia::render('gallery/Edit', [
             'gallery' => $gallery,
         ]);
     }
 
+    /**
+     * Memperbarui galeri yang ada di database.
+     */
     public function update(Request $request, Gallery $gallery)
     {
         $validated = $request->validate([
@@ -66,7 +84,6 @@ class GalleryController extends Controller
             'image' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
         ]);
 
-        // Update image kalau ada file baru
         if ($request->hasFile('image')) {
             if ($gallery->image_path) {
                 Storage::disk('public')->delete($gallery->image_path);
@@ -84,6 +101,9 @@ class GalleryController extends Controller
         return redirect()->route('admin.gallery.index')->with('success', 'Gallery updated successfully.');
     }
 
+    /**
+     * Menghapus galeri dari database.
+     */
     public function destroy(Gallery $gallery)
     {
         if ($gallery->image_path) {

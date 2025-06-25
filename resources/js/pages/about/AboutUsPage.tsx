@@ -1,6 +1,7 @@
 // resources/js/pages/About/AboutUsPage.tsx
 import Photo from '../../assets/IMG_2196 (1).png';
 import React from 'react';
+import ImageWithSkeleton from '@/components/ImageWithSkeleton';
 import { Building2, Target, Users, Handshake, ScanBarcode } from 'lucide-react';
 
 // Komponen kecil untuk kartu nilai perusahaan
@@ -34,7 +35,7 @@ export default function AboutUsPage() {
                 {/* Section Sejarah */}
                 <section className="mt-12">
                     <div className="grid md:grid-cols-2 gap-12 items-center">
-                        <img 
+                        <ImageWithSkeleton
                             src={Photo}
                             alt="REDI"
                             className="rounded-xl shadow-lg"
