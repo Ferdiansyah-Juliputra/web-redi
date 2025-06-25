@@ -37,7 +37,7 @@ class PublicationController extends Controller
 
         Publication::create($validated);
 
-        return redirect()->route('publication.index')->with('message', [
+        return redirect()->route('admin.publication.index')->with('message', [
             'type' => 'success',
             'text' => 'Publication added successfully!',
         ]);
@@ -68,7 +68,7 @@ class PublicationController extends Controller
 
         $publication->update($validated);
 
-        return redirect()->route('publication.index')->with('message', [
+        return redirect()->route('admin.publication.index')->with('message', [
             'type' => 'success',
             'text' => 'Publication updated successfully!',
         ]);
@@ -82,7 +82,7 @@ class PublicationController extends Controller
 
         $publication->delete();
 
-        return redirect()->route('publication.index')->with('message', [
+        return redirect()->route('admin.publication.index')->with('message', [
             'type' => 'success',
             'text' => 'Publication deleted.',
         ]);

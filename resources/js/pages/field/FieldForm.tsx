@@ -29,9 +29,9 @@ export default function FieldForm({ field }: FieldFormProps) {
     const data = { field: fieldName };
 
     if (isEdit && field?.id) {
-      router.put(route('field.update', field.id), data);
+      router.put(route('admin.field.update', field.id), data);
     } else {
-      router.post(route('field.store'), data);
+      router.post(route('admin.field.store'), data);
     }
   };
 

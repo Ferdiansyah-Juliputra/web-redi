@@ -57,9 +57,9 @@ export default function ProjectForm({
     };
 
     if (isEdit) {
-      router.put(route('project.update', project.id), payload);
+      router.put(route('admin.project.update', project.id), payload);
     } else {
-      router.post(route('project.store'), payload);
+      router.post(route('admin.project.store'), payload);
     }
   };
 

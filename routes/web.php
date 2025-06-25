@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-Route::get('/', [HomepageController::class, 'index'])->name('home');
+Route::get('/{any}', function () {
+    return view('public');
+})->where('any', '.*');
 Route::get('/admin', function() {
     return Inertia::render('welcome');
 })->name('admin');

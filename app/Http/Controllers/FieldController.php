@@ -39,7 +39,7 @@ class FieldController extends Controller
         ]);
 
         Field::create($validated);
-        return redirect()->route('field.index')->with('message', [
+        return redirect()->route('admin.field.index')->with('message', [
             'type' => 'success',
             'text' => 'Field added successfully!',
         ]);
@@ -63,7 +63,7 @@ class FieldController extends Controller
 
         $field->update($validated);
 
-        return redirect()->route('field.index')->with('message', [
+        return redirect()->route('admin.field.index')->with('message', [
             'type' => 'success',
             'text' => 'Field updated successfully!',
         ]);

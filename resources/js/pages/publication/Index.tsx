@@ -20,7 +20,7 @@ export default function Index() {
 
   const handleDelete = (id: number) => {
     if (confirm('Are you sure you want to delete this publication?')) {
-      router.delete(route('publication.destroy', id));
+      router.delete(route('admin.publication.destroy', id));
     }
   };
 
@@ -29,7 +29,7 @@ export default function Index() {
       <Head title="Publications" />
       <div className="flex justify-between items-center my-4 px-4">
         <h1 className="text-2xl font-bold">Publications</h1>
-        <Link href={route('publication.create')}>
+        <Link href={route('admin.publication.create')}>
           <Button>Add Publication</Button>
         </Link>
       </div>
@@ -62,7 +62,7 @@ export default function Index() {
               )}
 
               <div className="mt-3 flex gap-2">
-                <Link href={route('publication.edit', item.id)}>
+                <Link href={route('admin.publication.edit', item.id)}>
                   <Button variant="secondary">Edit</Button>
                 </Link>
                 <Button variant="destructive" onClick={() => handleDelete(item.id)}>

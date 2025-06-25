@@ -24,7 +24,7 @@ export default function Index() {
 
   const handleDelete = (id: number) => {
     if (confirm('Are you sure you want to delete this field?')) {
-      router.delete(route('field.destroy', id));
+      router.delete(route('admin.field.destroy', id));
     }
   };
 
@@ -34,7 +34,7 @@ export default function Index() {
 
       <div className="mx-4 my-4 flex justify-between items-center">
         <h1 className="text-2xl font-semibold">Fields</h1>
-        <Link href={route('field.create')}>
+        <Link href={route('admin.field.create')}>
           <Button>Add Field</Button>
         </Link>
       </div>
@@ -55,7 +55,7 @@ export default function Index() {
                   <td className="py-2 px-4">{field.id}</td>
                   <td className="py-2 px-4">{field.field}</td>
                   <td className="py-2 px-4 flex gap-2">
-                    <Link href={route('field.edit', field.id)}>
+                    <Link href={route('admin.field.edit', field.id)}>
                       <Button variant="secondary">Edit</Button>
                     </Link>
                     <Button

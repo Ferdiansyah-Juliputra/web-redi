@@ -45,7 +45,7 @@ class ProjectController extends Controller
             $project->clients()->sync($validated['client_ids']);
         }
 
-        return redirect()->route('project.index')->with('message', [
+        return redirect()->route('admin.project.index')->with('message', [
             'type' => 'success',
             'text' => 'Project added successfully!',
         ]);
@@ -80,7 +80,7 @@ class ProjectController extends Controller
 
         $project->clients()->sync($validated['client_ids'] ?? []);
 
-        return redirect()->route('project.index')->with('message', [
+        return redirect()->route('admin.project.index')->with('message', [
             'type' => 'success',
             'text' => 'Project updated successfully!',
         ]);
@@ -91,7 +91,7 @@ class ProjectController extends Controller
         $project->clients()->detach(); // penting: bersihkan pivot table
         $project->delete();
 
-        return redirect()->route('project.index')->with('message', [
+        return redirect()->route('admin.project.index')->with('message', [
             'type' => 'success',
             'text' => 'Project deleted.',
         ]);

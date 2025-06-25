@@ -24,8 +24,8 @@ export default function PublicationForm({ publication }: Props) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     publication
-      ? post(route('publication.update', publication.id), { method: 'post' })
-      : post(route('publication.store'));
+      ? post(route('admin.publication.update', publication.id), { method: 'post' })
+      : post(route('admin.publication.store'));
   };
 
   return (

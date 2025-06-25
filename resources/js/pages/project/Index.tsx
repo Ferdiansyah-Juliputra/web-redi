@@ -30,7 +30,7 @@ export default function Index() {
 
   const handleDelete = (id: number) => {
     if (confirm('Are you sure you want to delete this project?')) {
-      router.delete(route('project.destroy', id));
+      router.delete(route('admin.project.destroy', id));
     }
   };
 
@@ -39,7 +39,7 @@ export default function Index() {
       <Head title="Projects" />
       <div className="mx-4 my-4 flex justify-between items-center">
         <h1 className="text-2xl font-semibold">Projects</h1>
-        <Link href={route('project.create')}>
+        <Link href={route('admin.project.create')}>
           <Button>Add Project</Button>
         </Link>
       </div>
@@ -59,7 +59,7 @@ export default function Index() {
               </p>
 
               <div className="flex gap-2">
-                <Link href={route('project.edit', project.id)}>
+                <Link href={route('admin.project.edit', project.id)}>
                   <Button variant="secondary">Edit</Button>
                 </Link>
                 <Button
