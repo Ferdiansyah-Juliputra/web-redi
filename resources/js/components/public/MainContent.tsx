@@ -5,6 +5,7 @@ import Logo from '../../assets/logo transparan 1.png';
 import { Link } from 'react-router-dom';
 import ProjectGrowthChart from '../charts/ProjectGrowthChart'; // <- Impor Line Chart
 import ProjectFieldChart from '../charts/ProjectFieldChart';   // <- Impor Pie Chart
+import AnnouncementBanner from '../AnnouncementBanner';
 
 // Perbarui interface props untuk menerima data chart
 interface MainContentProps {
@@ -12,17 +13,19 @@ interface MainContentProps {
     clients: { id: number; name: string; image_url: string }[];
     projectsByYear: { year: number; count: number }[];
     projectsByField: { field: string; value: number }[];
+    openPositions: { id: number; title: string }[];
 }
 
-export default function MainContent({ stats, clients, projectsByYear, projectsByField }: MainContentProps) {
+export default function MainContent({ stats, clients, projectsByYear, projectsByField, openPositions }: MainContentProps) {
     return (
-        <main className="flex-1 lg:overflow-y-auto p-4 sm:p-8 no-scrollbar">
+        <main className="flex-1 lg:overflow-y-auto sm:p-8 p-4 no-scrollbar">
             <div className="max-w-6xl mx-auto">
+                <AnnouncementBanner positions={openPositions} />
                 {/* Hero Section (tidak berubah) */}
                 <section className="bg-indigo-900 text-white sm:p-10 p-8 rounded-xl shadow-2xl">
-                    <div className='bg-white rounded-lg p-3 w-fit flex items-center space-x-4'>
+                    <div className='bg-white rounded-lg p-4 w-fit flex items-center space-x-4'>
                         <img src={Logo} alt="Logo" className="h-12 w-auto object-contain" />
-                        <h1 className='text-indigo-900 font-semibold text-2xl md:text-3xl'>Regional Economic Development Institute</h1>
+                        <h1 className='text-indigo-900 font-semibold text-lg sm:text-2xl md:text-3xl'>Regional Economic Development Institute</h1>
                     </div>
                     <h2 className="text-4xl sm:text-5xl font-light mt-12">Smart, Excellent, Trusted.</h2>
                     <div className="mt-10 flex flex-wrap gap-8 sm:gap-12">

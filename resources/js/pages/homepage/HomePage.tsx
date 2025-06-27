@@ -17,18 +17,20 @@ interface HomePageProps {
     stats: Stats;
     projectsByYear: ProjectByYear[];   // <- Tambahkan ini
     projectsByField: ProjectByField[]; // <- Tambahkan ini
+    openPositions: { id: number; title: string; }[];
 }
 
-export default function HomePage({ clients, experiences, stats, projectsByYear, projectsByField }: HomePageProps) {
+export default function HomePage({ clients, experiences, stats, projectsByYear, projectsByField, openPositions }: HomePageProps) {
   return (
     // Layout 2 kolom yang merakit komponen
-    <div className="flex h-[calc(100vh-5rem)]">
+    <div className="flex h-screen">
         {/* 2. Teruskan props baru ke MainContent */}
         <MainContent 
             stats={stats} 
             clients={clients} 
             projectsByYear={projectsByYear} 
             projectsByField={projectsByField} 
+            openPositions={openPositions}
         />
         <ExperienceSidebar experiences={experiences} />
     </div>

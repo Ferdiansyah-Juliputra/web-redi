@@ -1,5 +1,4 @@
 // resources/js/components/HomepageSkeleton.tsx
-
 import React from 'react';
 
 // Komponen kecil untuk membuat kotak abu-abu, agar tidak berulang
@@ -12,7 +11,7 @@ export default function HomepageSkeleton() {
         <div className="flex h-screen bg-gray-50 overflow-hidden">
 
             {/* Kolom Kiri (Konten Utama) - Skeleton */}
-            <main className="flex-1 overflow-y-auto p-4 sm:p-8">
+            <main className="flex-1 overflow-y-auto p-4 sm:p-8 no-scrollbar">
                 <div className="max-w-6xl mx-auto">
                     {/* Hero Section Skeleton */}
                     <section className="bg-gray-300 dark:bg-gray-800 p-8 sm:p-10 rounded-xl shadow-2xl animate-pulse">

@@ -14,6 +14,8 @@ import ExperiencePage from '../experience/ExperiencePage';
 import ExperienceDetailPage from '../experience/ExperienceDetailPage';
 import PublicationPage from '../publication/PublicationPage';
 import PublicationDetailPage from '../publication/PublicationPreview';
+import NewsPage from '../news/NewsPage';
+import NewsDetailPage from '../news/NewsDetail';
 
 // Main Wrapper
 function HomePageWrapper() {
@@ -24,6 +26,7 @@ function HomePageWrapper() {
         projectsByYear: [],
         projectsByField: [],
         publications:[],
+        openPositions:[],
     });
     const [loading, setLoading] = useState(true);
 
@@ -69,6 +72,8 @@ function PublicApp() {
                     <Route path="/experiences/:id" element={<ExperienceDetailPage />} />
                     <Route path="/publications" element={<PublicationPage />} />
                     <Route path="/publications/:id" element={<PublicationDetailPage />} />
+                    <Route path="/news" element={<NewsPage />} />
+                    <Route path="/news/:id" element={<NewsDetailPage />} />
                     {/* ...dan seterusnya... */}
 
                 </Route>

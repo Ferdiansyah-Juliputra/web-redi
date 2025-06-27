@@ -166,3 +166,30 @@
     -ms-overflow-style: none;  /* Untuk IE dan Edge */
     scrollbar-width: none;  /* Untuk Firefox */
 }
+
+/* Target semua input di dalam form dengan kelas 'news-form' */
+.news-form input,
+.news-form textarea,
+.news-form button[role="combobox"] span {
+    color: #111827 !important; /* Paksa warna teks menjadi hitam */
+}
+
+/* Paksa warna placeholder menjadi abu-abu yang terlihat */
+.news-form input::placeholder,
+.news-form textarea::placeholder {
+    color: #9ca3af !important; /* text-gray-400 */
+}
+
+/* Trik khusus untuk placeholder input tanggal (dd/mm/yyyy) di Chrome/Edge */
+.news-form input[type="date"]::-webkit-datetime-edit-text,
+.news-form input[type="date"]::-webkit-datetime-edit-month-field,
+.news-form input[type="date"]::-webkit-datetime-edit-day-field,
+.news-form input[type="date"]::-webkit-datetime-edit-year-field {
+    /* Saat kosong, warna placeholder adalah abu-abu */
+    color: #9ca3af;
+}
+
+/* Saat sudah ada tanggal yang dipilih, paksa warnanya jadi hitam */
+.news-form input[type="date"]:valid {
+    color: #111827 !important;
+}

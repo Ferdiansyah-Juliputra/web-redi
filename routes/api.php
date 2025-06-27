@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\ExperienceController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\PublicationController;
+use App\Http\Controllers\Api\NewsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,5 @@ Route::get('/experiences', [ExperienceController::class, 'index']);
 Route::get('/experiences/{experience}', [ExperienceController::class, 'show']);
 Route::get('/publications', [PublicationController::class, 'index']);
 Route::get('/publications/{publication}', [PublicationController::class, 'show']);
+Route::get('/news', [NewsController::class, 'index']);
+Route::get('/news/{news}', [NewsController::class, 'show']);

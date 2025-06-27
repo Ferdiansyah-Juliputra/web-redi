@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\Experience;
 use App\Models\Project;
 use App\Models\Field;
+use App\Models\News; // 1. Jangan lupa import model News
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -22,41 +23,49 @@ class HomepageDataController extends Controller
             'fields'  => Field::count(),
         ];
 
-        // Data Klien dan Experience (tidak berubah)
+        // Data Klien (tidak berubah)
         $clients = Client::latest()->limit(10)->get();
-        $experiences = Experience::latest()->with('clients:id,name')->take(6)->get();
 
-        // =======================================================
-        // PERBAIKAN ADA DI BAGIAN INI
-        // =======================================================
-        // Data untuk Line Chart: Jumlah proyek per tahun
-        $projectsByYear = Project::select(
-                'year', // Langsung pilih kolom 'year'
-                DB::raw('count(*) as count')
-            )
+        // Data Experience untuk sidebar pratinjau
+        $experiences = Experience::latest()->take(6)->get();
+
+        // Data Chart (tidak berubah)
+        $projectsByYear = Project::select('year', DB::raw('count(*) as count'))
             ->groupBy('year')
             ->orderBy('year', 'asc')
             ->get();
             
-        // Data untuk Pie Chart: Jumlah proyek per bidang (field)
         $projectsByField = Field::withCount('projects')
             ->get()
             ->map(function ($field) {
-                return [
-                    'field' => $field->field,
-                    'value' => $field->projects_count,
-                ];
+                return ['name' => $field->field, 'value' => $field->projects_count];
             })
             ->filter(function ($field) {
                 return $field['value'] > 0;
             });
 
+        // =======================================================
+        // DATA BARU UNTUK BANNER IKLAN
+        // =======================================================
+        // Ambil semua berita, model accessor akan menghitung 'effective_status'
+        $allNews = News::latest()->get();
+
+        // Filter di sisi collection untuk hanya mengambil yang statusnya 'OPEN'
+        $openPositions = $allNews->filter(function ($news) {
+            return $news->effective_status === 'OPEN';
+        })->take(2); // Ambil 2 teratas untuk ditampilkan di banner
+
+
+        // =======================================================
+        // Mengembalikan semua data, termasuk data iklan
+        // =======================================================
         return response()->json([
             'stats'           => $stats,
             'clients'         => $clients,
-            'experiences'     => $experiences,
+            'experiences'     => $experiences, // Pastikan ini juga dikirim untuk sidebar
             'projectsByYear'  => $projectsByYear,
             'projectsByField' => $projectsByField->values(),
+            'openPositions'   => $openPositions->values(), // <-- Kirim data iklan
         ]);
     }
 }

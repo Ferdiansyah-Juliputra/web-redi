@@ -38,11 +38,7 @@ const mainNavItems: NavItem[] = [
         href: route('admin.publication.index'),
         icon: FolderCheck,
     },
-    {
-        title: 'Opportunities',
-        href: route('admin.opportunity.index'),
-        icon: Axis3d,
-    },
+
     {
         title: 'Field of Work',
         href: route('admin.field.index'),

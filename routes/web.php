@@ -9,7 +9,7 @@ use App\Http\Controllers\{
     ProjectController,
     PublicationController,
     FieldController,
-    OpportunityController
+    NewsController
 };
 use App\Http\Controllers\HomepageController;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +29,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('project', ProjectController::class);
     Route::resource('publication', PublicationController::class);
     Route::resource('field', FieldController::class);
-    Route::resource('opportunity', OpportunityController::class);
+    Route::resource('news', NewsController::class);
 });
 
 // FILE RUTE UNTUK LOGIN, DLL.

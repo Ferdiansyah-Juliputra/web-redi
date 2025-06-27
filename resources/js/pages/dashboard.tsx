@@ -16,9 +16,9 @@ interface DashboardProps {
     experienceCount: number;
     clientCount: number;
     projectCount: number;
-    opportunityCount: number;
     publicationCount: number;
     fieldCount: number;
+    newsCount: number;
 }
 
 const cardClass =
@@ -29,9 +29,9 @@ export default function Dashboard({
     experienceCount,
     clientCount,
     projectCount,
-    opportunityCount,
     publicationCount,
     fieldCount,
+    newsCount,
 }: DashboardProps) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -66,9 +66,9 @@ export default function Dashboard({
                         <p className="text-4xl font-bold mt-2">{publicationCount}</p>
                     </Link>
 
-                    <Link href={route('admin.opportunity.index')} className={cardClass}>
+                    <Link href={route('admin.news.index')} className={cardClass}>
                         <h2 className="text-lg font-semibold">Total Opportunity News</h2>
-                        <p className="text-4xl font-bold mt-2">{opportunityCount}</p>
+                        <p className="text-4xl font-bold mt-2">{newsCount}</p>
                     </Link>
 
                     <Link href={route('admin.field.index')} className={cardClass}>
