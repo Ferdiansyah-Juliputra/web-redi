@@ -6,6 +6,7 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 interface ChartData {
     field: string;
     value: number;
+    [key: string]: string | number; // 👈 ini penting
 }
 
 // Daftar warna
